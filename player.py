@@ -4,9 +4,9 @@ from support import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, group):
-
         super().__init__(group)
 
+        self.import_assets()
         # player sprite setup
         self.image = pygame.Surface((32, 64))
         self.image.fill('green')
@@ -23,8 +23,8 @@ class Player(pygame.sprite.Sprite):
                            'right_hoe': [], 'left_hoe': [], 'up_hoe': [], 'down_hoe': [],
                            'right_axe': [], 'left_axe': [], 'up_axe': [], 'down_axe': [],
                            'right_water': [], 'left_water': [], 'up_water': [], 'down_water': []}
-        for animations in self.animations.keys():
-            full_path ="../graphics/character/" + animation 
+        for animation in self.animations.keys():
+            full_path =" ./graphics/character/" + animation
             self.animations[animation] = import_folder(full_path)
     def input(self):
         keys = pygame.key.get_pressed()
