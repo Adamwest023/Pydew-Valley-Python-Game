@@ -9,10 +9,12 @@ class Player(pygame.sprite.Sprite):
         # player sprite setup
         self.image = pygame.Surface((32, 64))
         self.image.fill('green')
-        self.rect = self.image.get_rect(center=pos)
+        self.rect = self.image.get_rect(center= pos)
+        self.speed = 200 
 
         # movement attributes
         self.direction = pygame.math.Vector2()
+        self.pos = pygame.math.Vector2(self.rect.center)
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -23,14 +25,18 @@ class Player(pygame.sprite.Sprite):
             self.direction.y = 1
         else:
             self.direction.y = 0
-            
+
         if keys[pygame.K_RIGHT]:
             self.direction.x = 1
         elif keys[pygame.K_LEFT]:
             self.direction.x = -1
         else:
             self.direction.x = 0
-            
-        print(self.direction)
+
+    def move(self,dt):
+        self.pos += self.direction * self.speed * dt  
+        self.rect.center = self.pos
+
     def update(self, dt):
         self.input()
+        self.move(dt)
